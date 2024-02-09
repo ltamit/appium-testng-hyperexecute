@@ -2,9 +2,11 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidElement;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.net.URL;
@@ -24,18 +26,19 @@ public class AndroidApp {
     public void AndroidApp1(String device, String version, String platform) {
         try {
             DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setCapability("build", "Java TestNG");
+            capabilities.setCapability("build", "Appium HyperExecute Build - TestNG");
             capabilities.setCapability("name", platform + " " + device + " " + version);
             capabilities.setCapability("deviceName", device);
             capabilities.setCapability("platformVersion", version);
             capabilities.setCapability("platformName", platform);
             capabilities.setCapability("isRealMobile", true);
             //AppURL (Create from Wikipedia.apk sample in project)
-            capabilities.setCapability("app", app_id); //Enter your app url
+            capabilities.setCapability("app", "lt://APP10160601511705574765600786"); //Enter your app url
             capabilities.setCapability("deviceOrientation", "PORTRAIT");
-            capabilities.setCapability("network", false);
+            capabilities.setCapability("network", true);
             capabilities.setCapability("visual", true);
             capabilities.setCapability("devicelog", true);
+            capabilities.setCapability("appProfiling", true);
             capabilities.setCapability("autoGrantPermissions", true);
 
             //capabilities.setCapability("geoLocation", "HK");
@@ -47,6 +50,10 @@ public class AndroidApp {
             //Changes color to pink
             color.click();
             Thread.sleep(1000);
+            Assert.assertTrue(color.isDisplayed());
+
+
+
             //Back to orginal color
             color.click();
 
@@ -87,8 +94,16 @@ public class AndroidApp {
             MobileElement url = (MobileElement) driver.findElementById("com.lambdatest.proverbial:id/url");
             url.sendKeys("https://www.lambdatest.com");
 
+            String url1 = url.getText();
+            Assert.assertEquals(url1, "https://www.lambdatest.com", "Assertion Passed");
+            //Change value above to pass fail the test case
+
             MobileElement find = (MobileElement) driver.findElementById("com.lambdatest.proverbial:id/find");
             find.click();
+
+            ((JavascriptExecutor) driver).executeScript("lambda-hook: {\"action\": \"setTestStatus\",\"arguments\": {\"status\":\"passed\", \"remark\":\"Test Passed\"}} ");
+
+
             driver.quit();
         } catch (Exception e) {
             e.printStackTrace();

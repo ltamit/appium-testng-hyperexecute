@@ -36,23 +36,19 @@ Debug and run your code. Run iOSApp.java or AndroidApp.java in your editor.
 **Android:**
 
 ```
-mvn test -P android-single
+ ./hyperexecute --user LT_USERNAME --key LT_ACCESS_KEY --config yaml/android.yaml
 ```
 
-```
-mvn test -P android-parallel
-```
 
 **IOS:**
 
 ```
-mvn test -P ios-single
-```
 
-```
-mvn test -P ios-parallel
+ ./hyperexecute --user LT_USERNAME --key LT_ACCESS_KEY --config yaml/ios.yaml
+
 ```
 
 ### **Step 4: View Test Execution**
 
 Once you have run your tests, you can view the test execution along with logs. You will be able to see the test cases passing or failing. You can view the same at [LambdaTest Automation](https://accounts.lambdatest.com/login).
+

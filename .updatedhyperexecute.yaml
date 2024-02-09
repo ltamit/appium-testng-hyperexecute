@@ -1,0 +1,104 @@
+version: "0.2"
+user: amitwalia
+key: SjOTOTQikYHfho5r39aieNJACmUoiofHmhZB8jUyCUG439zMXW
+testSuites: []
+pre: ['mvn dependency:resolve']
+preDirectives:
+    commands: ['mvn dependency:resolve']
+    maxRetries: 0
+    shell: ""
+    workingDirectory: ""
+post: [ls target/surefire-reports/]
+postDirectives:
+    commands: [ls target/surefire-reports/]
+    shell: ""
+    workingDirectory: ""
+jobLabel:
+    - hyperexecute-appium-testng
+runson: linux
+autosplit: true
+concurrency: 2
+testDiscoveryResult:
+    - iOSApp 2
+    - iOSApp 1
+globalTimeout: 150
+tunnelOpts:
+    testsPerTunnel: 10
+testSuiteTimeout: 150
+testSuiteStep: 150
+retryOnFailure: true
+maxRetries: 1
+jobID: 0ecada3d-5c93-417b-8696-90eb83d15c68
+codeDirectory: appium-testng-hyperexecute
+framework:
+    name: maven/testng
+    flags:
+        - -P ios-parallel
+    discoveryFlags: []
+    discoveryType: xmltest
+    runnerFlags: []
+    workingDirectory: ""
+    isTestNGXMLSuite: true
+    defaultReports: false
+    args:
+        appPath: ""
+        testSuitePath: ""
+        xcTestPlanPath: ""
+        shards:
+            mappings: []
+        filters:
+            attributes: []
+        devices: []
+        deviceSelectionStrategy: ""
+        appId: ""
+        testSuiteAppId: ""
+        xcTestPlanId: ""
+        video: true
+        deviceLog: true
+        buildName: ""
+        reservation: true
+        skipXMLOnRun: false
+        skipInstall: false
+        disableReleaseDevice: false
+        platformName: ""
+        isRealMobile: false
+        avoidAppLaunch: false
+        queueTimeout: 0
+        uninstallPreviousBuild: false
+        language: ""
+        locale: ""
+        preservedDevice: false
+        fixedIP: ""
+        resignApp: true
+        minorOsVersion: false
+    additional_args: null
+    licenseKey: ""
+    userdefinediscovery: false
+    toscaArgs: null
+    version: ""
+    downloadURL: ""
+    baseCommand: ""
+cypress: false
+betaFeature:
+    setPartiallyCompletedAsCompleted: false
+combineTasksInMatrixMode: false
+captureScreenRecordingForScenarios: false
+maxRetriesPreSteps: 0
+triggerMode: false
+sourcePayload:
+    verifySSL: true
+collectLocalGitData: true
+dynamicAllocation: false
+appium: true
+platformConfig: null
+differentialUpload:
+    enabled: false
+    ttlHours: null
+    forcedDisabled: false
+project:
+    id: ""
+    name: ""
+    type: default
+meta: {}
+alwaysRunPostSteps: false
+errorCategorizedOnFailureOnly: false

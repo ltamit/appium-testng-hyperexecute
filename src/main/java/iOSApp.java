@@ -10,6 +10,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.net.URL;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class iOSApp {
@@ -27,7 +28,7 @@ public class iOSApp {
 
         try {
             DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setCapability("build", "Java TestNG");
+            capabilities.setCapability("build", "Appium HyperExecute Build - TestNG");
             capabilities.setCapability("name", platform + " " + device + " " + version);
             capabilities.setCapability("deviceName", device);
             capabilities.setCapability("platformVersion", version);
@@ -37,6 +38,8 @@ public class iOSApp {
             capabilities.setCapability("network", false);
             capabilities.setCapability("visual", true);
             capabilities.setCapability("devicelog", true);
+            capabilities.setCapability("autoAcceptAlerts", true);
+
             //capabilities.setCapability("geoLocation", "HK");
 
             String hub = "https://" + userName + ":" + accessKey + "@" + grid_url + "/wd/hub";
@@ -78,8 +81,15 @@ public class iOSApp {
             MobileElement url = (MobileElement) driver.findElementByAccessibilityId("url");
             url.click();
             url.sendKeys("https://www.lambdatest.com");
+
+            String url1 = url.getText();
+            Assert.assertEquals(url1, "https://www.lambdatest.com", "Assertion Passed");
+
             Wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("find"))).click();
             Thread.sleep(1000);
+
+            ((JavascriptExecutor) driver).executeScript("lambda-hook: {\"action\": \"setTestStatus\",\"arguments\": {\"status\":\"passed\", \"remark\":\"Test Passed\"}} ");
+
             driver.quit();
         } catch (Exception e) {
             e.printStackTrace();
